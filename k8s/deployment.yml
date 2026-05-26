@@ -1,1 +1,39 @@
 # TODO: Deployment with 2 replicas, resource requests/limits
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: node-registry
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: node-registry
+
+  template:
+    metadata:
+      labels:
+        app: node-registry
+
+    spec:
+      containers:
+        - name: node-registry
+          image: ianott/node-registry:latest 
+
+          ports:
+            - containerPort: 8000
+
+          envFrom:
+            - secretRef:
+                name: app-secret
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
