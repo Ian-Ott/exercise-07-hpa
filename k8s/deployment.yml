@@ -6,7 +6,7 @@ metadata:
   name: node-registry
 
 spec:
-  replicas: 1
+  replicas: 2
 
   selector:
     matchLabels:
@@ -23,7 +23,7 @@ spec:
           image: ianott/node-registry:latest 
 
           ports:
-            - containerPort: 8000
+            - containerPort: 8080
 
           envFrom:
             - secretRef:
